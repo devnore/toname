@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = 'toname'
-  s.version = '0.1.3'
+  s.version = '0.2.0'
   s.authors = ['Sam Cavenagh', 'Donavan Stanley']
   s.date = '2014-01-01'
   s.description = 'Convert video/torrent filename into movie/tv series name and year'

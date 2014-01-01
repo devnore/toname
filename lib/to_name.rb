@@ -17,6 +17,9 @@ class ToName
   SESSION_ESP_REGEX_OF = /(\d+)\s?of\s?(\d+)/i
   SESSION_REGEXS = [SESSION_ESP_REGEX_1, SESSION_ESP_REGEX_2, SESSION_ESP_REGEX_3]
 
+  SERIES_REGEX = /S(\d{2})/i
+  SPECIALS_REGEX = /((christmas|easter|holiday|hanukkah|halloween)\W+special)/i
+
   def self.to_name(location)
     raw_name = self.get_file_name(location)
 
@@ -82,9 +85,19 @@ class ToName
       end
     end
 
+    # Handle seasonal special episodes
+    special = $1
+    if raw_name =~ SPECIALS_REGEX
+      special = $1
+      if raw_name =~ SERIES_REGEX
+        session = $1.to_i
+        name = $`
+      end
+    end
+
     name.strip!
     return FileNameInfo.new(:raw_name => raw_name, :name => name, :year => year,
-                            :series => session, :episode => episode, :location => location)
+                            :series => session, :episode => episode, :location => location, :special => special)
   end
 
   def self.get_file_name(location)

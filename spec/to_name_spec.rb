@@ -41,6 +41,10 @@ describe ToName do
       check_to_name('/test/My-Tvshow.01x03.extra.avi', 'My Tvshow 01x03 extra', 'My Tvshow', nil, 1, 3)
     end
 
+    it 'should handle seasonal specials' do
+      check_to_name('/test/My-Tvshow.S06-Christmas.Special.avi', 'My Tvshow S06 Christmas Special', 'My Tvshow', nil, 6, nil, 'Christmas Special')
+    end
+
     it 'should handle x format when a year is present' do
       check_to_name('/test/My-Tvshow.2013.1x3.avi', 'My Tvshow 2013 1x3', 'My Tvshow 2013', nil, 1, 3)
       check_to_name('/test/My-Tvshow.2013.01x03.avi', 'My Tvshow 2013 01x03', 'My Tvshow 2013', nil, 1, 3)
@@ -179,7 +183,7 @@ describe ToName do
     ToName.parent_folder_name('/tmp/cd2/test.mpg').should == 'tmp'
   end
 
-  def check_to_name(location, raw_name, name, year=nil, series=nil, episode=nil)
+  def check_to_name(location, raw_name, name, year=nil, series=nil, episode=nil, special=nil)
     c = ToName.to_name(location)
     c.should_not be_nil
     c.location.should == location
@@ -189,5 +193,6 @@ describe ToName do
     c.year.should == year
     c.series.should == series
     c.episode.should == episode
+    c.special.should == special
   end
 end

@@ -1,5 +1,5 @@
 class FileNameInfo
-  attr_accessor :raw_name, :location, :name, :year, :series, :episode
+  attr_accessor :raw_name, :location, :name, :year, :series, :episode, :special
 
   def initialize(params = {})
     @name = params[:name]
@@ -8,6 +8,7 @@ class FileNameInfo
     @location = params[:location]
     @series = params[:series]
     @episode = params[:episode]
+    @special = params[:special]
   end
 
   def to_s
@@ -15,7 +16,9 @@ class FileNameInfo
     if @name
       s += @name
       s += " (#{@year})" if @year
-      s += " S: #{@series} E: #{@episode}" if @series || @episode
+      s += " S: #{@series} E: #{@episode}" if @series && @episode
+      s += " S: #{@series} E: #{@special}" if @series && @special
+      s += " S: #{@series} E: unknown" if @series
     elsif @raw_name
       s += @raw_name
     else
@@ -26,7 +29,7 @@ class FileNameInfo
   
   def <=>(other)
     if series && other.series && series != other.series
-      return (series <=> other.series) 
+      return (series <=> other.series)
     elsif episode && other.episode && episode != other.episode
       return (episode <=> other.episode)
     elsif name != other.name
