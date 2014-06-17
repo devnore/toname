@@ -57,18 +57,20 @@ class ToName
     session = nil
     episode = nil
     SESSION_REGEXS.each do |session_regex|
-      if name =~ session_regex
+      if raw_name =~ session_regex
         name = $`
         session = $1.to_i
         episode = $2.to_i
+        year = nil # When the year is present with the series info assume it's part of the title
         break
       end
     end
 
-    if session.nil? && name =~ SESSION_ESP_REGEX_OF
+    if session.nil? && raw_name =~ SESSION_ESP_REGEX_OF
       name = $`
       session = 1
       episode = $1.to_i
+      year = nil # When the year is present with the series info assume it's part of the title
     end
 
     # Sometimes there can be multiple media files for a single movie, we want to remove the version number if this is the case
