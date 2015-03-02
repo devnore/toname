@@ -10,6 +10,10 @@ class FileNameInfo
     @episode = params[:episode]
   end
 
+  def is_tv_show?
+    @series ? true : false
+  end
+
   def to_s
     s = ''
     if @name
@@ -23,10 +27,10 @@ class FileNameInfo
     end
     s
   end
-  
+
   def <=>(other)
     if series && other.series && series != other.series
-      return (series <=> other.series) 
+      return (series <=> other.series)
     elsif episode && other.episode && episode != other.episode
       return (episode <=> other.episode)
     elsif name != other.name

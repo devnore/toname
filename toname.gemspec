@@ -2,14 +2,14 @@
 
 Gem::Specification.new do |s|
   s.name = 'toname'
-  s.version = '0.1.6'
+  s.version = '0.1.9'
   s.authors = ['Simon Ingelsson', 'Sam Cavenagh', 'Donavan Stanley']
-  s.date = '2014-01-01'
+  s.date = '2015-03-02'
   s.description = 'Convert video/torrent filename into movie/tv series name and year'
-  s.email = 'cavenaghweb@hotmail.com'
+  s.email = 'simon.ingelsson@gmail.com'
   s.extra_rdoc_files = ['README.md']
   s.files = ['README.md', 'spec', 'lib/file_name_info.rb', 'lib/to_name.rb']
-  s.homepage = 'http://github.com/o-sam-o/toname'
+  s.homepage = 'http://github.com/devnore/toname'
   s.rdoc_options = ['--main', 'README.md']
   s.require_paths = ['lib']
   s.rubygems_version = '2.0.3'
